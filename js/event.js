@@ -9,7 +9,7 @@ function startP2P()
 
         var player = new Clappr.Player({
             parentId: "#player",
-            source: "https://livecdn.fptplay.net/hda1/vtv1hd_hls.smil/playlist.m3u8?token=eyJjaGFubmVsX2lkIjogInZ0djEtaGQiLCAicm1pcCI6ICIxMjMuMjAuMTQ5LjE0MyIsICJ1c2VyX2lkIjogNTI3MTY2MiwgInRpbWVzdGFtcCI6IDE2MjYyNzE3OTh9&user_id=8026601",
+            source: "https://wowza.peer5.com/live/smil:bbb_abr.smil/playlist.m3u8",
             mute: true,
             autoPlay: true,
             playback: {
