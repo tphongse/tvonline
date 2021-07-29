@@ -1,5 +1,7 @@
 var labels = ['HTTP DOWN', 'P2P DOWN', 'P2P UP']
 var traffic = [0, 0, 0];
+let now = new Date(); //
+var trafficTime = [now, now, now]; //
 var pieChart;
 
 function startP2P()
@@ -23,13 +25,16 @@ function startP2P()
         engine.on(p2pml.core.Events.PieceBytesDownloaded, function (method, bytes, peerId){
             console.log('### Download ###');
             console.log('-> '+method+': '+bytes);
+            let now = new Date(); //
             switch(method)
             {
                 case 'http':
-                    traffic[0] += bytes/(1024*1024).toFixed(2);
+                    traffic[0] = bytes/(1024).toFixed(2);  
+                    trafficTime[0] = now; //
                     break;
                 case 'p2p':
-                    traffic[1] += bytes/(1024*1024).toFixed(2);
+                    traffic[1] = bytes/(1024).toFixed(2);
+                    trafficTime[1] = now; //
                     break;
             }
             updatePieChart(traffic)
@@ -38,7 +43,9 @@ function startP2P()
         engine.on(p2pml.core.Events.PieceBytesUploaded, function (method, bytes){
             console.log('### Upload ###');
             console.log('-> '+method+': '+bytes);
-            traffic[2] += bytes/(1024*1024).toFixed(2);
+            let now = new Date(); //
+            traffic[2] = bytes/(1024).toFixed(2);
+            trafficTime[2] = now; //
             updatePieChart(traffic)
         });
 
@@ -95,5 +102,17 @@ function updatePieChart(traffic)
     pieChart.update();
 }
 
+function resetTrafficDataset()
+{
+    let now = new Date();
+    for(let i=0; i<trafficTime.length; i++)
+    {
+        let m1 = now.getMinutes();
+        let m2 = trafficTime[i].getMinutes();
+        if(abs(m1-m2)>1) traffic[i] = 0;
+    }
+}
+
 startP2P();
 initPieChart();
+setInterval(resetTrafficDataset, 1000); //
