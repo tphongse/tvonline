@@ -113,11 +113,16 @@ function resetTrafficDataset()
         if(Math.abs(m1-m2)>=1000)
         {
             traffic[i] = 0;
-            count++;
         }
         console.log('Reset: '+ Math.abs(m1-m2));
     }
-    if(traffic.length - count > 1) updatePieChart(traffic);
+    
+    for(let i=0; i<trafficTime.length; i++)
+    {
+       if (traffic[i] !== 0) count++; 
+    }
+    
+    if(count>1) updatePieChart(traffic);
 }
 
 startP2P();
