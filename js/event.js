@@ -118,4 +118,4 @@ function resetTrafficDataset()
 
 startP2P();
 initPieChart();
-setInterval(resetTrafficDataset, 500); //
+setInterval(resetTrafficDataset, 1000); //
