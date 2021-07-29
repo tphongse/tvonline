@@ -23,8 +23,8 @@ function startP2P()
         });
 
         engine.on(p2pml.core.Events.PieceBytesDownloaded, function (method, bytes, peerId){
-            //console.log('### Download ###');
-            //console.log('-> '+method+': '+bytes);
+            console.log('### Download ###');
+            console.log('-> '+method+': '+bytes);
             let now = new Date(); //
             switch(method)
             {
@@ -41,8 +41,8 @@ function startP2P()
         });
         
         engine.on(p2pml.core.Events.PieceBytesUploaded, function (method, bytes){
-            //console.log('### Upload ###');
-            //console.log('-> '+method+': '+bytes);
+            console.log('### Upload ###');
+            console.log('-> '+method+': '+bytes);
             let now = new Date(); //
             traffic[2] = bytes/(1024).toFixed(2);
             trafficTime[2] = now; //
@@ -114,7 +114,7 @@ function resetTrafficDataset()
         {
             traffic[i] = 0;
         }
-        console.log('Reset: '+ Math.abs(m1-m2));
+       
     }
     
     for(let i=0; i<trafficTime.length; i++)
@@ -122,7 +122,11 @@ function resetTrafficDataset()
        if (traffic[i] !== 0) count++; 
     }
     
-    if(count>1) updatePieChart(traffic);
+    if(count>1)
+    {
+        updatePieChart(traffic);
+        console.log('Update....');
+    }
 }
 
 startP2P();
