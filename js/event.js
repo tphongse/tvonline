@@ -110,9 +110,10 @@ function resetTrafficDataset()
         let m1 = now.getMinutes();
         let m2 = trafficTime[i].getMinutes();
         if(Math.abs(m1-m2)>=1) traffic[i] = 0;
+        console.log('Reset: '+ Math.abs(m1-m2));
     }
     updatePieChart(traffic);
-    console.log('Reset: '+ Math.abs(m1-m2));
+   
 }
 
 startP2P();
