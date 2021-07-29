@@ -104,16 +104,20 @@ function updatePieChart(traffic)
 
 function resetTrafficDataset()
 {
+    let count = 0;
     let now = new Date();
     for(let i=0; i<trafficTime.length; i++)
     {
         let m1 = now.getTime();
         let m2 = trafficTime[i].getTime();
-        if(Math.abs(m1-m2)>=1000) traffic[i] = 0;
+        if(Math.abs(m1-m2)>=1000)
+        {
+            traffic[i] = 0;
+            count++;
+        }
         console.log('Reset: '+ Math.abs(m1-m2));
     }
-    updatePieChart(traffic);
-   
+    if(traffic.length - count > 1) updatePieChart(traffic);
 }
 
 startP2P();
