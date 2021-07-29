@@ -107,9 +107,9 @@ function resetTrafficDataset()
     let now = new Date();
     for(let i=0; i<trafficTime.length; i++)
     {
-        let m1 = now.getSeconds();
-        let m2 = trafficTime[i].getSeconds();
-        if(Math.abs(m1-m2)>=1) traffic[i] = 0;
+        let m1 = now.getTime();
+        let m2 = trafficTime[i].getTime();
+        if(Math.abs(m1-m2)>=1000) traffic[i] = 0;
         console.log('Reset: '+ Math.abs(m1-m2));
     }
     updatePieChart(traffic);
