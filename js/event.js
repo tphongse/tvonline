@@ -109,7 +109,7 @@ function resetTrafficDataset()
     {
         let m1 = now.getMinutes();
         let m2 = trafficTime[i].getMinutes();
-        if(abs(m1-m2)>1) traffic[i] = 0;
+        if(Math.abs(m1-m2)>1) traffic[i] = 0;
     }
 }
 
